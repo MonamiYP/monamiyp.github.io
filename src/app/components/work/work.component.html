@@ -5,8 +5,8 @@
     <div *ngIf="blogPosts$ | async as blogPosts; else loadingBlock" class="flex flex-col justify-center items-center w-screen font-light bg-neutral-100 dark:bg-neutral-900 dark:text-white">
         <div class="py-6 w-8/12">These are my relevant work experiences and internships.</div>
         <div class="grid grid-cols-1">
-            <div class="work-posts-container h-96" *ngFor="let blogPost of blogPosts.items">
-                <img [src]="blogPost.fields.image.fields.file.url" alt="image">
+            <div class="work-posts-container" *ngFor="let blogPost of blogPosts.items">
+                <div class="img-container"><img [src]="blogPost.fields.featuredImage.fields.file.url" alt="image"></div>
                 <div class="m-3">
                     <div class="font-medium">{{ blogPost.fields.title }}</div>
                     <div>{{ blogPost.fields.summary }}</div>

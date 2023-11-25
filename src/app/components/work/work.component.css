@@ -1,0 +1,22 @@
+.work-posts-container {
+    width: 800px;
+    height: 400px;
+}
+
+.work-posts-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-container {
+    width:100%;
+    height:65%;
+}
+
+@media (max-width: 800px) {
+    .work-posts-container {
+        width: 100%;
+        height: 400px;
+    }
+}
