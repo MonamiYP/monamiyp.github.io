@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<div *ngIf="blogPost$ | async as blogPost">
+    <h1 class="text-2xl font-bold align-center py-4 text-white w-screen bg-gradient-to-r from-neutral-950 to-slate-700">
+        <div class="flex justify-center w-screen">{{ blogPost.fields.title }}</div>
+    </h1>
+    <div class="blog-container flex flex-col justify-center items-center bg-neutral-100 dark:bg-neutral-900 dark:text-white pb-20">
+        <img [src]="blogPost.fields.featuredImage.fields.file.url" alt="image" class="featured-image">
+        <div class="w-10/12">
+            <div class="post-title text-2xl py-4 pt-10 font-extrabold">{{ blogPost.fields.title }}</div>
+            <div [innerHtml]="renderRichText(blogPost.fields.content)"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-20" *ngIf="blogPost.fields.gallery != null">
+            <div *ngFor="let image of blogPost.fields.gallery">
+                <img [src]="image.fields.file.url" alt="image">
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
