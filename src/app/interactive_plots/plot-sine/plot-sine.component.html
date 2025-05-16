@@ -1,0 +1,15 @@
+<div class="p-4 max-w-xl mx-auto">
+  <label for="freq">Frequency: {{ frequency }}</label>
+  <input
+    id="freq"
+    type="range"
+    min="1"
+    max="10"
+    step="0.1"
+    [(ngModel)]="frequency"
+    (input)="updateGraph()"
+    class="w-full mb-4"
+  />
+
+  <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+</div>
