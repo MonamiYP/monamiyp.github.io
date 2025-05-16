@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { PlotlyModule } from 'angular-plotly.js';
-import * as PlotlyJS from 'plotly.js-dist-min';
+import * as PlotlyJS from 'plotly.js-basic-dist';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
