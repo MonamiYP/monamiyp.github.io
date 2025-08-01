@@ -16,18 +16,6 @@ export class HomeComponent implements OnInit {
   blogPosts$ : Observable<any> | undefined;
 
   ngOnInit(): void {
-    this.blogPosts$ = this.contentfulService.getProjectEntries().pipe(
-    map((response) => {
-      const items = response.items || [];
-
-      // Optional: sort newest to oldest by createdAt
-      const sorted = items.sort((a: any, b: any) => {
-        return new Date(b.sys.createdAt).getTime() - new Date(a.sys.createdAt).getTime();
-      });
-
-      // Take the first 3 only
-      return { ...response, items: sorted.slice(0, 3) };
-    })
-  );
+    this.blogPosts$ = this.contentfulService.getProjectEntries();
   }
 }
