@@ -1,8 +1,11 @@
+<div class="flex flex-col min-h-screen">
 <app-navbar></app-navbar>
+
+    <main class="flex-grow bg-neutral-100 dark:bg-neutral-900">
     <h1 class="text-2xl font-bold align-center py-4 text-white w-screen bg-gradient-to-r from-neutral-950 to-slate-700">
         <div class="flex justify-center w-screen">Projects</div>
     </h1>
-    <div *ngIf="blogPosts$ | async as blogPosts;else loadingBlock" class="flex flex-col justify-center items-center w-screen font-light bg-neutral-100 dark:bg-neutral-900 dark:text-white">
+    <div *ngIf="blogPosts$ | async as blogPosts;else loadingBlock" class="flex flex-col justify-center items-center w-screen font-light  dark:text-white">
         <div class="py-6 w-8/12">Here you can find some projects I have worked on during my free time. I like working on a variety of types of projects, from coding, to PCB design, to 3D printing.</div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="blog-posts-container h-96" *ngFor="let blogPost of blogPosts.items">
@@ -15,7 +18,10 @@
             </div>
         </div>
     </div>
+    </main>
+    
     <ng-template #loadingBlock>
         <app-loading-screen></app-loading-screen>
     </ng-template>
 <app-footer></app-footer>
+</div>

@@ -22,6 +22,17 @@ img {
     margin-left: 30px;
 }
 
+@media (min-width: 2000px) {
+  .about-text {
+    font-size: 36px;
+  }
+
+  .about-title {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+}
+
 @media (max-width: 1000px) {
     .image-text-section {
         flex-direction: column;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef, ElementRef, Type } from '@angular/core';
+import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef, ElementRef, Type, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ContentfulService } from 'src/app/services/contentful.service';
@@ -32,8 +32,23 @@ export class PostComponent implements OnInit {
     if (this.postContentRef && !this.rendered) {
       this.rendered = true;
       setTimeout(() => this.drawGraphs(), 0);
+
       this.displayLatexMaths();
+      this.toggleVideoAutoplay();
     }
+  }
+
+  toggleVideoAutoplay() {
+    const videos = document.querySelectorAll<HTMLVideoElement>('video.responsive-video');
+    videos.forEach(video => {
+      if (window.innerWidth >= 768) {
+        video.setAttribute('autoplay', '');
+        video.play().catch(() => {});  // Attempt to autoplay
+      } else {
+        video.removeAttribute('autoplay');
+        video.pause();
+      }
+    });
   }
 
   displayLatexMaths() {
@@ -89,9 +104,9 @@ export class PostComponent implements OnInit {
 
         [BLOCKS.EMBEDDED_ASSET]: (node:any) => {
           if (node.data.target.fields.file.contentType == 'video/mp4' || node.data.target.fields.file.contentType == 'video/quicktime') {
-            return `<div class="flex justify-center"><video playsinline autoplay muted loop class="w-96"><source src="${node.data.target.fields.file.url}" type="video/mp4"></video></div>`;
+            return `<div class="flex justify-center"><video playsinline muted controls loop class="responsive-video"><source src="${node.data.target.fields.file.url}" type="video/mp4"></video></div>`;
           }
-          return `<div class="flex justify-center"><img class="w-96" src="${node.data.target.fields.file.url}"/></div>`;
+          return `<div class="flex justify-center"><img class="w-full md:w-1/2" src="${node.data.target.fields.file.url}"/></div>`;
         },
 
         [BLOCKS.QUOTE]: (node:any) => { // Quotes are for drawing figures, title is figure name
@@ -105,7 +120,13 @@ export class PostComponent implements OnInit {
         },
 
         [INLINES.HYPERLINK]: (node:any) => {
-          return `<a href="/${node.data.uri}" class="link">${node.content[0].value}</a>`;
+          const uri = node.data.uri;
+          const isExternal = uri.startsWith('http');
+          if (isExternal) {
+            return `<a href="${uri}" target="_blank" rel="noopener noreferrer" class="link">${node.content[0].value}</a>`;
+          } else {
+          return `<a href="/${uri}" class="link">${node.content[0].value}</a>`;
+          }
         }
       },
     };

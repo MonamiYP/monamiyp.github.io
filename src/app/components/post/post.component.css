@@ -3,3 +3,15 @@
     object-fit: cover;
     max-height: 50vh;
 }
+
+.post-width {
+    width: 100vw;
+}
+
+.post-content {
+    padding: 0% 5%;
+}
+
+.post-title {
+    padding: 5%;
+}

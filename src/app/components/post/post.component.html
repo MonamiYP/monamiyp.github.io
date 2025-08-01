@@ -5,11 +5,11 @@
     </h1>
     <div class="blog-container flex flex-col justify-center items-center bg-neutral-100 dark:bg-neutral-900 dark:text-white pb-20">
         <img [src]="blogPost.fields.featuredImage.fields.file.url" alt="image" class="featured-image">
-        <div class="w-10/12">
-            <div class="post-title text-2xl px-20 py-4 pt-10 font-extrabold">{{ blogPost.fields.title }}</div>
-            <div #postContentContainer [innerHtml]="renderRichText(blogPost.fields.content)" class="post-content px-20"></div>
+        <div class="post-width">
+            <div class="post-title text-2xl font-extrabold">{{ blogPost.fields.title }}</div>
+            <div #postContentContainer [innerHtml]="renderRichText(blogPost.fields.content)" class="post-content"></div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-20" *ngIf="blogPost.fields.gallery != null">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 post-content" *ngIf="blogPost.fields.gallery != null">
             <div *ngFor="let image of blogPost.fields.gallery">
                 <img [src]="image.fields.file.url" alt="image">
             </div>
