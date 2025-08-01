@@ -8,7 +8,7 @@
         <div *ngIf="blogPosts$ | async as blogPosts; else loadingBlock" class="flex flex-col justify-center items-center w-screen font-light bg-neutral-100 dark:bg-neutral-900 dark:text-white">
             <div class="py-6 w-8/12">Welcome to my website. Below you can see my three most recent projects. You can see all of my <a routerLink="/projects" class="link">projects</a> and <a routerLink="/work" class="link">work experience</a> by clicking on the links or using the navigation bar above.</div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-                <div class="blog-posts-container h-96" *ngFor="let blogPost of blogPosts.items.slice(0, 3)">
+                <div class="blog-posts-container h-96" *ngFor="let blogPost of blogPosts.items">
                     <img [src]="blogPost.fields.featuredImage.fields.file.url" alt="image">
                     <div class="m-3">
                         <div class="font-medium">{{ blogPost.fields.title }}</div>
